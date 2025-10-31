@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>React Without NPM</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+   
+    <script type="text/babel">
+        
+      const App = () => {
+        const [value, setValue] = React.useState(0)
+
+        const clickHandler = () => {
+          setValue(value + 1)
+        }
+
+        React.useEffect(
+          function(){
+            console.log(value)
+            const btn = document.querySelector('.btn')
+            btn.addEventListener("click", clickHandler)
+
+            return function(){
+              btn.removeEventListener("click", clickHandler)
+            }
+          },[value]
+        )
+
+        return(
+          <button className='btn'>Click {value}</button>
+        )
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
