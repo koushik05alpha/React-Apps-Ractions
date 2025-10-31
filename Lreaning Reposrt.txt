@@ -1,0 +1,4 @@
+Electron JS -> npm init -y
+            npm i electron -D
+
+Project Start -> npm start
